@@ -9,7 +9,13 @@ const router = express.Router();
 const products = [];
 
 router.get('/add-product', (req, res, next) => {
-    res.render('add-Product', {pageTitle: 'Add Product'});
+    res.render('add-Product', {
+        pageTitle: 'Add Product',
+        path: '/admin/add-product',
+        formsCSS: true,
+        productCSS: true,
+        activeAddProduct: true
+    });
     //res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
     //rootDir is a helper with the absolute path on OS to the project folder it's used in(routes in this case)
     //The next attribute will be in this case .. to go up one level
