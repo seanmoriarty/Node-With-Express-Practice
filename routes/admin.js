@@ -2,31 +2,16 @@ const path = require('path');
 
 const express = require('express');
 
-const rootDir = require('../util/path');
+const productsController = require('../controllers/products');
 
 const router = express.Router();
 
-const products = [];
+router.get('/add-product', productsController.getAddProduct);
+router.post('/add-product', productsController.postAddProduct);
 
-router.get('/add-product', (req, res, next) => {
-    res.render('add-Product', {
-        pageTitle: 'Add Product',
-        path: '/admin/add-product',
-        formsCSS: true,
-        productCSS: true,
-        activeAddProduct: true
-    });
-    //res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
-    //rootDir is a helper with the absolute path on OS to the project folder it's used in(routes in this case)
-    //The next attribute will be in this case .. to go up one level
-    //The next attribute is the folder, then the file.
-});
+router.get('/edit-product', productsController.getEditProduct);
+router.post('/edit-product', productsController.postEditProduct);
 
-router.post('/add-product', (req, res, next) => {
-    console.log(req.body);
-    products.push({title: req.body.title});
-    res.redirect('/');
-});
+router.get('/products', productsController.getAdminProducts);
 
-exports.routes = router;
-exports.products = products;
+module.exports = router;
